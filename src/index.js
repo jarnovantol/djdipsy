@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { readdirSync } = require('fs');
 const { join } = require('path');
-const MusicClient = require('./src/struct/Client');
+const MusicClient = require('./struct/Client.js');
 const { Collection } = require('discord.js');
 const client = new MusicClient({ prefix: process.env.DISCORD_PREFIX });
 
