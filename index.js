@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { readdirSync } = require('fs');
 const { join } = require('path');
-const MusicClient = require('./struct/Client');
+const MusicClient = require('./src/struct/Client');
 const { Collection } = require('discord.js');
 const client = new MusicClient({ prefix: process.env.DISCORD_PREFIX });
 
@@ -48,4 +48,4 @@ client.on('message', message => {
 	}
 });
 
-client.login('Njc2MDkzNTQwMjk1NzcwMTEy.XkCXSQ.VvARY5peeWcYoDIYOaDn6mGMzM4');
+client.login(process.env.token);
