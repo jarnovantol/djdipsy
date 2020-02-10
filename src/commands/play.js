@@ -5,7 +5,7 @@ const ytdlDiscord = require('ytdl-core-discord');
 module.exports = {
 	name: 'play',
 	description: 'Play command.',
-	usage: '[command name]',
+	usage: '<bijgevoegde link>',
 	args: true,
 	cooldown: 5,
 	async execute(message, args) {

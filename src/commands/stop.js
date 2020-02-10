@@ -8,6 +8,6 @@ module.exports = {
 		const serverQueue = message.client.queue.get(message.guild.id);
 		if (!serverQueue) return message.channel.send('Er is geen nummer die ik kan stoppen.');
 		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('Stop command has been used!');
+		serverQueue.connection.dispatcher.end('Muziek is gestopt!');
 	}
 };

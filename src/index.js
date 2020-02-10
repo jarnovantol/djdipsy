@@ -11,6 +11,11 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
+client.on("ready", async () => {
+	console.log(`${bot.user.username} is online op ${bot.guilds.size} servers!`);
+	bot.user.setActivity("zijn eigen pokoes", {type: "LISTENING"});
+});
+
 client.once('ready', () => console.log('READY!'));
 client.on('message', message => {
 	if (!message.content.startsWith(client.config.prefix) || message.author.bot) return;
@@ -18,10 +23,10 @@ client.on('message', message => {
 	const commandName = args.shift().toLowerCase();
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 	if (!command) return;
-	if (command.guildOnly && message.channel.type !== 'text') return message.reply('I can\'t execute that command inside DMs!');
+	if (command.guildOnly && message.channel.type !== 'text') return message.reply('Ik kan dat command niet uitvoeren in privéberichten!');
 	if (command.args && !args.length) {
-		let reply = `You didn't provide any arguments, ${message.author}!`;
-		if (command.usage) reply += `\nThe proper usage would be: \`${client.config.prefix}${command.name} ${command.usage}\``;
+		let reply = `Het command klopt niet, ${message.author}!`;
+		if (command.usage) reply += `\nDe juiste manier van gebruiken is: \`${client.config.prefix}${command.name} ${command.usage}\``;
 		return message.channel.send(reply);
 	}
 	if (!client.cooldowns.has(command.name)) {
@@ -34,7 +39,7 @@ client.on('message', message => {
 		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
-			return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+			return message.reply(`Wacht ${timeLeft.toFixed(1)} seconden voordat je het \`${command.name}\` command opnieuw gebruikt.`);
 		}
 	}
 	timestamps.set(message.author.id, now);
@@ -44,7 +49,7 @@ client.on('message', message => {
 		command.execute(message, args);
 	} catch (error) {
 		console.error(error);
-		message.reply('there was an error trying to execute that command!');
+		message.reply('Er is iets misgegaan tijdens het uitvoeren van het command!');
 	}
 });
 
