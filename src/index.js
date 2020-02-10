@@ -12,8 +12,8 @@ for (const file of commandFiles) {
 }
 
 client.on("ready", async () => {
-	console.log(`${bot.user.username} is online op ${bot.guilds.size} servers!`);
-	bot.user.setActivity("zijn eigen pokoes", {type: "LISTENING"});
+	console.log(`${client.user.username} is online op ${client.guilds.size} servers!`);
+	client.user.setActivity("zijn eigen pokoes", {type: "LISTENING"});
 });
 
 client.once('ready', () => console.log('READY!'));
